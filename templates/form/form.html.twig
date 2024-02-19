@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Form{% endblock %}
+
+{% block body %}
+    {% if results is defined and results|length %}
+        <div class="results">
+            <h2>Results</h2>
+            The time zone {{ results['timezone']}} has {{ results['offset']}} minutes offset to UTC on the given day at noon.<br />
+            February in this year is {{ results['days_in_month'] }} days long.<br />
+            The specified month {{ results['month'] }} is {{ results['days_long'] }} days long.
+        </div>
+    {% endif %}
+    {% if errors is defined and errors|length %}
+        {% for error in errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+    {% endif %}
+    <h1>Form</h1>
+    <form class="form" method="post">
+        Date: <input type="text" name="date" placeholder="2024-02-19" value="{{ date }}"><br><br>
+        Timezone: <input type="text" name="timezone" placeholder="Europe/London" value="{{ timezone }}"><br><br>
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}
